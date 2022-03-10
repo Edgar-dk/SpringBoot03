@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--按照原始的方式，下面应该有很多的信息。例如:一些基本的标签，还有其他的信息，但是现在没有那些
+        基本的信息了，原因是在SpringBoot的底层以及把这些配置好了，只需要写上连接的地址+名字+密码
+        但是这些，又不在这里写，原因是，在这个地方写的话，比较的麻烦，可以直接在yaml文件中写，所白了
+        就是可以把yaml文件完全的代替当前的xml文件
+
+        注意：最重要的是没有那些工厂模式了，不需要在去创建一个工厂，以及工厂在去创建一个对象-->
+
+
+    <!--1.开启驼峰命名（可以在yaml中写）-->
+    <settings>
+        <setting name="multipleResultSetsEnabled" value="true"/>
+    </settings>
+</configuration>

@@ -1,0 +1,146 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="#" type="image/png">
+
+    <title>Dynamic Table</title>
+    <!--dynamic table-->
+    <link href="js/advanced-datatable/css/demo_page.css" rel="stylesheet"/>
+    <link href="js/advanced-datatable/css/demo_table.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css"/>
+    <div th:include="common :: CommonHeader"></div>
+</head>
+
+<body class="sticky-header">
+
+<section>
+
+
+    <div th:replace="common :: #left"></div>
+    <!-- main content start-->
+    <div class="main-content">
+
+        <div th:replace="common :: header"></div>
+
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>
+                Dynamic Table
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Data Tables</a>
+                </li>
+                <li class="active"> Dynamic Table</li>
+            </ul>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Dynamic Table
+                            <span class="tools pull-right">
+                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                <a href="javascript:;" class="fa fa-times"></a>
+             </span>
+                        </header>
+                        <div class="panel-body">
+                            <div class="adv-table">
+                                <table class="display table table-bordered table-striped" id="dynamic-table">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>id</th>
+                                        <th>name</th>
+                                        <th>age</th>
+                                        <th>email</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                    <!--过来的数据是以user的形式封装好的，那么接受的时候，也是以user的形式接受
+                                        ，数据以List的形式来的，就需要遍历，${}是传递过来的数据，-->
+                                    <tr class="gradeX odd" th:each="user,stat: ${page.records}">
+                                        <!--数据具体到每一个里面的小数据，先计数-->
+                                        <td th:text="${stat.count}">Trident</td>
+                                        <!--user点id来接收数据，以文本的形式-->
+                                        <td th:text="${user.id}">id</td>
+                                        <td th:text="${user.name}">Internet
+                                            Explorer
+                                        </td>
+                                        <td th:text="${user.age}">Win 95+</td>
+                                        <td class="center hidden-phone">[[${user.email}]]</td>
+                                        <td class="center hidden-phone">X</td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Rendering engine</th>
+                                        <th>Browser</th>
+                                        <th>Platform(s)</th>
+                                        <th class="hidden-phone">Engine version</th>
+                                        <th class="hidden-phone">CSS grade</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="dataTables_info" id="dynamic-table_info">
+                                            当前第[[${page.current}]]页
+                                            总计[[${page.pages}]]页
+                                            共[[${page.total}]]条记录
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="dataTables_paginate paging_bootstrap pagination">
+                                            <ul>
+                                                <li class="prev"><a href="#">← Previous</a></li>
+                                                <li th:class="${num == page.current?'active':''}" th:each="num:${#numbers.sequence(1,page.pages)}">
+                                                    <a th:href="@{/dynamic_table(pn=${num})}">[[${num}]]</a>
+                                                </li>
+                                                <li class="next"><a href="#">Next → </a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        <footer>
+            2020 &copy; AdminEx by ThemeBucket </a>
+        </footer>
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<script th:replace="common :: #CommonScript"></script>
+
+<!--dynamic table-->
+<script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+<!--dynamic table initialization -->
+<script src="js/dynamic_table_init.js"></script>
+
+
+</body>
+</html>
