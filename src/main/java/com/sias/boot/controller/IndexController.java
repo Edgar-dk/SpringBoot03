@@ -44,11 +44,13 @@ public class IndexController {
     public String main(User user , HttpSession session, Model model){
         log.info("main的方法执行");
         if (StringUtils.hasLength(user.getUserName()) && "1".equals(user.getPassword())){
-            /*if中的条件成立的话，执行下面的语句，就是把密码存起来，存到user对象中，名字是loginUser*/
+            /*if中的条件成立的话，执行下面的语句，就是把密码存起来，存到user对象中，名字是loginUser
+            * 下面执行成功的话，是重定向的方式，到这个页面，至于为什么使用session的方式，因为这个是域对象
+            * 把数据放在域对象中，来共享的*/
             session.setAttribute("loginUser","user");
             return "redirect:/main.html";
         }else {
-            /*若是有一条不成功，在放回到登陆的页面*/
+            /*若是有一条不成功，在放回到登陆的页面，下面也是放在model来共享数据的*/
             model.addAttribute("msg","账号密码错误");
             return "login";
         }

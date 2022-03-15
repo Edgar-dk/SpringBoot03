@@ -20,6 +20,12 @@ spring:
         exclusions: '*.js,*.gif,*.jpg,*.css,*.ico,/druid/*' #表示排除那些地址
       aop-patterns: com.sias.boot.* #监控这个地址下面的包
 
+  #阿里云的使用，注意一点的是，下面账户的名字，后面不可以使用数字，会导致连接不上
+#  redis:
+#    host: r-bp10fp301i7jskko3epd.redis.rds.aliyuncs.com
+#    port: 6379
+#    password: myredis:HU3226ding328159@
+
 
 #2.Mybatis配置文件地址
 #  为什么呢，原因是底层要加载这些数据

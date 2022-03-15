@@ -6,12 +6,9 @@ import com.sias.boot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -81,6 +78,18 @@ public class TableController {
         List<User> records = page.getRecords();
         model.addAttribute("page",page);
         return "table/dynamic_table";
+    }
+
+    /*3.按钮的方式去删除一行数据RedirectAttributes ra*/
+    @GetMapping("/user/delete{id}")
+    public String deleteById(@PathVariable("id") Long id,
+                             @RequestParam(value = "pn",defaultValue = "1") Integer pn,
+                             RedirectAttributes ra
+                             ){
+
+        userService.removeById(id);
+        ra.addAttribute("pn",pn);
+        return "/table/dynamic_table";
     }
 
 
